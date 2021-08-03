@@ -11,7 +11,7 @@ class Book(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('book_edit', kwargs={'pk': self.pk})
+        return reverse('book_view', kwargs={'pk': self.pk})
 
     def get_book_name(self):
         return self.name
