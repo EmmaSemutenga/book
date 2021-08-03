@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOOK APP</title>
+</head>
+<body>
+    <h1>{{ request.user }}</h1>
+    <h1>Books</h1>
+
+    <table aria-busy="1">
+    <thead>
+        <tr>
+        <th>Name</th>
+        <th>Pages</th>
+        <th>View</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in book_list %}
+        <tr>
+        <td>{{ book.name }}</td>
+        <td>{{ book.pages }}</td>
+        <td><a href={% url "book_view" book.id %}>view</a></td>
+        <td><a href={% url "book_edit" book.id %}>edit</a></td>
+        <td><a href={% url "book_delete" book.id %}>delete</a></td>
+        </tr>
+        {% empty %}
+        <p>No books available</p>
+        {% endfor %}
+    </tbody>
+    </table>
+    
+    <a href={% url "book_new" %}>New</a> 
+</body>
+</html>
