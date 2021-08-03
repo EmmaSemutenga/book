@@ -28,4 +28,4 @@ jobs:
       env:
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
       run: |
-        python manage.py test
+        coverage run manage.py test && coverage report --fail-under=95
