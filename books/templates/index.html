@@ -10,7 +10,7 @@
     <h1>Welcome to our blog -- {{ request.user }}</h1>
     <ul>
         
-        {% if user.is_superuser %}
+        {% if user.is_authenticated %}
         <li><a href={% url "logout_user" %}>Logout</a></li>
         <li><a href={% url "book_list" %}>Books</a></li>
         {% else %}
