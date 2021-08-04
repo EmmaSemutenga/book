@@ -125,5 +125,5 @@ class BookUpdateViewTests(TestCase):
         url = reverse("book_edit", args=(book.id,))
         response = self.client.get(url)
         self.assertEqual(response.context["custom_heading"], "Edit Book")
-        self.assertTemplateUsed(response, "book_formmmm.html")
+        self.assertTemplateUsed(response, "book_form.html")
 
