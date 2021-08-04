@@ -34,6 +34,8 @@ TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = "authentication.User"
+
 LOGIN_URL = '/login/'
 
 # Application definition
@@ -46,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'books',
+    'authentication',
 ]
 
 MIDDLEWARE = [
@@ -128,7 +131,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'static'
-STATICFILES_DIRS = [BASE_DIR / 'todosite/static']
+STATICFILES_DIRS = [BASE_DIR / 'my_project/static']
+
+MEDIA_URL = '/images/'
+MEDIA_ROOT = BASE_DIR / 'my_project/static/uploads/images'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

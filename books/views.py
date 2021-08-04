@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
+from authentication.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -33,8 +33,12 @@ def register_user(request):
         password = request.POST["password"]
         if not password:
             return render(request, 'register_user.html')
+
+        photo = request.FILES["photo"]
+        if not photo:
+            return render(request, 'register_user.html')
             
-        user = User.objects.create_user(username, email, password)
+        user = User.objects.create_user(username=username, email=email, password=password, photo=photo)
         return redirect("login_user")
 
     return render(request, 'register_user.html')

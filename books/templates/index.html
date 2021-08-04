@@ -8,6 +8,7 @@
 </head>
 <body>
     <h1>Welcome to our blog -- {{ request.user }}</h1>
+    <img src={{request.user.photo.url}} alt="Profile Picture">
     <ul>
         
         {% if user.is_authenticated %}

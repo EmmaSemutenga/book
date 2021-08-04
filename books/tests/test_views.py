@@ -1,8 +1,9 @@
-from django.http import response
 from django.test import TestCase
 from django.urls import reverse
-from django.contrib.auth.models import User
+from authentication.models import User
 from books.models import Book
+from io import BytesIO
+
 
 
 
@@ -21,8 +22,10 @@ class UserRegisterViewTests(TestCase):
         """
         User is registered and redirected to login page
         """
+        img = BytesIO(b'images/Screen_Shot_2019-12-24_at_12.33.34.png')
+        img.name = "myimage.png"
         url = reverse("register_user")
-        response = self.client.post(url, { "username": "janedoe", "email":"janedoe@email.com", "password":"123"})
+        response = self.client.post(url, { "username": "janedoe", "email":"janedoe@email.com", "password":"123", "photo": img})
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("login_user"), 302)
 
@@ -57,10 +60,12 @@ class UserRegisterViewTests(TestCase):
         """
         Logged in user is redirected if they try to login
         """
-        user = User.objects.create_user(username="jdoe", email="jdoe@email.com", password="123")
+        img = BytesIO(b'images/Screen_Shot_2019-12-24_at_12.33.34.png')
+        img.name = "myimage.png"
+        user = User.objects.create_user(username="jdoe", email="jdoe@email.com", password="123", photo=img.name)
         self.client.login(username = "jdoe", password="123")
         url = reverse("register_user")
-        response = self.client.post(url, { "username": "", "email":"janedoe@email.com", "password":"123"})
+        response = self.client.post(url, { "username": "", "email":"janedoe@email.com", "password":"123", "photo":img.name})
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("home"), 302)
 
