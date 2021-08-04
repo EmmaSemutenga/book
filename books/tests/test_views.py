@@ -114,3 +114,16 @@ class BookCreateViewTests(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.context["custom_heading"], "Create Book")
 
+class BookUpdateViewTests(TestCase):
+
+    def test_if_custom_heading_context_is_passed(self):
+        user = User.objects.create_user(username="jdoe", email="jdoe@email.com", password="123")
+        login_url = reverse('login_user')
+        self.client.post(login_url, {"username": "jdoe", "password" : "123"})
+        book = Book.objects.create(name="Tom Sawyer", pages=350)
+
+        url = reverse("book_edit", args=(book.id,))
+        response = self.client.get(url)
+        self.assertEqual(response.context["custom_heading"], "Edit Book")
+        self.assertTemplateUsed(response, "book_form.html")
+
