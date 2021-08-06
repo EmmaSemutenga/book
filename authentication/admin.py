@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin as UAdmin
 from .models import User
 
 class UserAdmin(UAdmin):
-    list_display = ('username', 'photo')
+    list_display = ('photo', 'username')
 
 
 
